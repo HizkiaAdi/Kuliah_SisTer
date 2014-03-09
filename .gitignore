@@ -215,4 +215,4 @@ pip-log.txt
 .mr.developer.cfg
 /Forecast/ForecastServer/nbproject/private/
 
-.xml
+*.xml
