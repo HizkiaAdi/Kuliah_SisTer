@@ -67,8 +67,9 @@ public class SisterWeatherClient {
                             {   
                               outputPrint=data.getForecastDay()+" "+data.getForecastDate()+" "+data.getForecastWeather();
                               System.out.println(outputPrint);
-
+                              
                             }
+                            break;
                         }
                        
 
