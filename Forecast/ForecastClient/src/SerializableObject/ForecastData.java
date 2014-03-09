@@ -1,13 +1,17 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package SerializableObject;
 import java.io.Serializable;
 /**
  *
  * @author misbahul
  */
-
-public class ForecastData implements Serializable
-{
-    private static final long serialVersionUID = 1L;
+public class ForecastData implements Serializable{
+    private static final long  serialVersionUID=1L;
     private String forecastDay;
     private String forecastDate;
     private String forecastWeather;
@@ -58,5 +62,7 @@ public class ForecastData implements Serializable
         this.forecastDate=forecastDate;
         this.forecastDay = forecastDay;
         this.forecastWeather=forecastWeather;
-    }    
+    }
+
+    
 }
