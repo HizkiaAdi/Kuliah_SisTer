@@ -6,32 +6,21 @@ package forecastserver;
  */
 
 import SerializableObject.ForecastData;
-<<<<<<< HEAD
-=======
+import SerializableObject.ForecastObject;
 import java.io.IOException;
->>>>>>> tambah forecast object
+import java.util.List;
 
 public class ForecastServer
 {
     static ClientHandler handler;
+    static List<ForecastObject> dataList;
     
     public static void main(String[] args)
     {
         ForecastData data;
         
-<<<<<<< HEAD
-        if(args.length == 0)
-            handler = new ClientHandler(1234);
-        else
-            handler = new ClientHandler(Integer.parseInt(args[0]));
+        ServerInit();
         
-        while(true)
-        {
-            if(handler.Listen())
-            {
-                data = new ForecastData(null, null, null);
-                handler.Send();
-=======
         try
         {
             if(args.length == 0)
@@ -61,12 +50,22 @@ public class ForecastServer
                 
                 data = new ForecastData(null, null, null);
                 handler.Send(data);
->>>>>>> tambah forecast object
             }
             else
             {
                 continue;
             }
         }
+    }
+    
+    public static void ServerInit()
+    {
+        dataList.add(new ForecastObject("10-03-2014", "senin", "mendung"));
+        dataList.add(new ForecastObject("11-03-2014", "selasa", "cerah"));
+        dataList.add(new ForecastObject("12-03-2014", "rabu", "hujan badai"));
+        dataList.add(new ForecastObject("13-03-2014", "kamis", "berawan"));
+        dataList.add(new ForecastObject("14-03-2014", "jumat", "hujan"));
+        dataList.add(new ForecastObject("15-03-2014", "sabtu", "cerak"));
+        dataList.add(new ForecastObject("16-03-2014", "minggu", "hujan ringan"));        
     }
 }

@@ -8,23 +8,23 @@ import java.util.Date;
  */
 public class ForecastObject
 {
-    Date date;
+    String date;
     String day;
     String weather;
     
-    public ForecastObject(Date date, String day, String weather)
+    public ForecastObject(String date, String day, String weather)
     {
         this.date = date;
         this.day = day;
         this.weather = weather;
     }
     
-    public Date getDate()
+    public String getDate()
     {
         return this.date;
     }
     
-    public void setDate(Date date)
+    public void setDate(String date)
     {
         this.date = date;
     }
