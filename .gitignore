@@ -224,6 +224,7 @@ core
 nbproject/*
 !nbproject/project.properties
 !nbproject/project.xml
+build.xml
  
 #java specific
 *.class
