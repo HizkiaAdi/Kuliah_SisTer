@@ -7,18 +7,20 @@ package forecastserver;
 
 import java.net.*;
 import SerializableObject.ForecastData;
+import SerializableObject.ForecastObject;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
 public class ClientHandler
 {
     private DatagramSocket socket;
     private DatagramPacket packet;
     private int port;
-    private ForecastData data;
+    private String param;
     private int clientport;
     private InetAddress clienthost;
     private ByteArrayOutputStream baos;
@@ -38,7 +40,7 @@ public class ClientHandler
     }
     
 
-    public ForecastData Listen()
+    public String Listen()
     {
         try
         {
@@ -49,9 +51,9 @@ public class ClientHandler
             this.clientport = socket.getPort();
             
             ois.read(buffer);
-            data = (ForecastData)ois.readObject();
+            param = (String)ois.readObject();
             
-            return data;
+            return param;
         }
         catch(IOException | ClassNotFoundException ex)
         {
@@ -60,14 +62,14 @@ public class ClientHandler
         }
     }
     
-    public boolean Send(ForecastData data)
+    public boolean Send(List<ForecastData> data)
     {
         try
         {
-            this.data = data;
             oos.writeObject((Object)data);
             buffer = baos.toByteArray();
             packet = new DatagramPacket(buffer, buffer.length, clienthost, clientport);
+            socket.send(packet);
             
             return true;
         }
