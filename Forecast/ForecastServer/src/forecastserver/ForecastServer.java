@@ -7,12 +7,14 @@ package forecastserver;
 
 import SerializableObject.ForecastData;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ForecastServer
 {
     static ClientHandler handler;
     static List<ForecastData> dataList;
+    static List<ForecastData> data;
     
     public static void main(String[] args)
     {
@@ -35,11 +37,20 @@ public class ForecastServer
         while(true)
         {
             param = handler.Listen();
+            data.clear();
+            
             if(param != null)
             {
+                if(param.equals("all"))
+                {
+                    data = new ArrayList<>(dataList);
+                }
+                else
+                {
+                    find(param.toLowerCase());
+                }
                 
-                
-                handler.Send(dataList);
+                handler.Send(data);
             }
             else
             {
@@ -48,19 +59,16 @@ public class ForecastServer
         }
     }
     
-    public static List<ForecastData> findByDate(ForecastData param)
-    {
-        
-    }
-    
-    public static List<ForecastData> findByDay(ForecastData param)
-    {
-        
-    }
-    
-    public static List<ForecastData> findByWeather(ForecastData param)
-    {
-        
+    public static void find(String param)
+    {       
+        for(ForecastData i:dataList)
+        {
+            if(i.getForecastDate().equals(param) || i.getForecastDay().equals(param) ||
+                    i.getForecastWeather().equals(param))
+            {
+                data.add(i);
+            }
+        }
     }
     
     public static void ServerInit()
