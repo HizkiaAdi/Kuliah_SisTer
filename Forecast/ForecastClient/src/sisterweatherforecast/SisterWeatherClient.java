@@ -51,27 +51,22 @@ public class SisterWeatherClient {
         try {
             //clientSocket= new Socket(ipAdrress, port);
             dgSocket= new DatagramSocket();
-            packet= new DatagramPacket(buffer,buffersize,adrres, port); 
-            baos = new ByteArrayOutputStream();
-            bais = new ByteArrayInputStream(buffer);
-            ObjectInputStream ois= new ObjectInputStream(bais);
-            ObjectOutputStream oos= new ObjectOutputStream(baos);
+//            packet= new DatagramPacket(buffer,buffersize,adrres, port); 
             while(true)
             {
- 
-             
               System.out.print("Massukan Perintah :");
               scan=new Scanner(System.in);
               input=scan.next();
               SendData(input);
                     while(true)
                     {
+                       buffer= new byte[1500];
                         if((output=ReceiveData())!=null)
                         {
                             for(ForecastData data:output)
                             {   
                               outputPrint=data.getForecastDay()+" "+data.getForecastDate()+" "+data.getForecastWeather();
-                              System.out.print(outputPrint);
+                              System.out.println(outputPrint);
 
                             }
                         }
@@ -91,11 +86,15 @@ public class SisterWeatherClient {
     {  List<ForecastData> data;
         try
         {
-            dgSocket = new DatagramSocket(this.port);
+           // dgSocket = new DatagramSocket(this.port);
             packet = new DatagramPacket(buffer, buffersize);
-            dgSocket.receive(packet);           
+            dgSocket.receive(packet);     
+          //  System.out.println(buffer.length);
+            bais = new ByteArrayInputStream(buffer);
+            ois= new ObjectInputStream(bais);
             ois.read(buffer);
             data = (List<ForecastData>)ois.readObject();
+         
             
             return data;
         }
@@ -112,6 +111,8 @@ public class SisterWeatherClient {
     {
       try
         {
+            baos = new ByteArrayOutputStream();
+            oos= new ObjectOutputStream(baos);
             oos.writeObject((Object)data);
             buffer = baos.toByteArray();
             packet = new DatagramPacket(buffer, buffer.length, adrres, port);
