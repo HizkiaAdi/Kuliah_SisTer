@@ -58,17 +58,20 @@ public class SisterWeatherClient {
             ObjectOutputStream oos= new ObjectOutputStream(baos);
             while(true)
             {
+              System.out.print("Massukan Perintah :");
               scan=new Scanner(System.in);
-              input=scan.nextLine();
+              input=scan.next();
               SendData(input);
-                    while((output=ReceiveData())!=null)
+                    while(true)
                     {
-                        
-                        for(ForecastData data:output)
-                        {   
-                          outputPrint=data.getForecastDay()+" "+data.getForecastDate()+" "+data.getForecastWeather();
-                          System.out.print(outputPrint);
-                           
+                        if((output=ReceiveData())!=null)
+                        {
+                            for(ForecastData data:output)
+                            {   
+                              outputPrint=data.getForecastDay()+" "+data.getForecastDate()+" "+data.getForecastWeather();
+                              System.out.print(outputPrint);
+
+                            }
                         }
                        
 
