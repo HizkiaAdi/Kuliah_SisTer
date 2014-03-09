@@ -24,7 +24,7 @@ public class SisterWeatherForecast {
         // TODO code application logic here
         Scanner scan;
         scan= new Scanner(System.in);
-        SisterWeatherClient client= new SisterWeatherClient(1234,"127.0.0.1");
+        SisterWeatherClient client= new SisterWeatherClient(1234,"");
         try {
             client.StartClient();
         } catch (ClassNotFoundException ex) {
