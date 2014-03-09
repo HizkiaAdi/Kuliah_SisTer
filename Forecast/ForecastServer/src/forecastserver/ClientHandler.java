@@ -33,10 +33,7 @@ public class ClientHandler
     public ClientHandler(int port) throws IOException
     {
         this.port = port;
-        baos = new ByteArrayOutputStream();
-        bais = new ByteArrayInputStream(buffer);
-        oos = new ObjectOutputStream(baos);
-        ois = new ObjectInputStream(bais);
+        buffer = new byte[BUF_SIZE];       
     }
     
 
@@ -49,7 +46,8 @@ public class ClientHandler
             socket.receive(packet);            
             this.clienthost = socket.getInetAddress();
             this.clientport = socket.getPort();
-            
+            bais = new ByteArrayInputStream(buffer);
+            ois = new ObjectInputStream(bais);
             ois.read(buffer);
             param = (String)ois.readObject();
             
@@ -66,6 +64,8 @@ public class ClientHandler
     {
         try
         {
+            baos = new ByteArrayOutputStream();
+            oos = new ObjectOutputStream(baos);
             oos.writeObject((Object)data);
             buffer = baos.toByteArray();
             packet = new DatagramPacket(buffer, buffer.length, clienthost, clientport);
