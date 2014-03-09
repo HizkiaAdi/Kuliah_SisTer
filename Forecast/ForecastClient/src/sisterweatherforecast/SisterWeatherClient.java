@@ -59,6 +59,7 @@ public class SisterWeatherClient {
             while(true)
             {
  
+             
               System.out.print("Massukan Perintah :");
               scan=new Scanner(System.in);
               input=scan.next();
