@@ -37,7 +37,11 @@ public class ClientHandler
         ois = new ObjectInputStream(bais);
     }
     
+<<<<<<< HEAD
     public boolean Listen()
+=======
+    public ForecastData Listen()
+>>>>>>> tambah forecast object
     {
         try
         {
@@ -50,12 +54,20 @@ public class ClientHandler
             ois.read(buffer);
             data = (ForecastData)ois.readObject();
             
+<<<<<<< HEAD
             return true;
+=======
+            return data;
+>>>>>>> tambah forecast object
         }
         catch(IOException | ClassNotFoundException ex)
         {
             System.out.println(ex);
+<<<<<<< HEAD
             return false;
+=======
+            return null;
+>>>>>>> tambah forecast object
         }
     }
     

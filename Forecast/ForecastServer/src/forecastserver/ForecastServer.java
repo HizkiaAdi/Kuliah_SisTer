@@ -6,6 +6,10 @@ package forecastserver;
  */
 
 import SerializableObject.ForecastData;
+<<<<<<< HEAD
+=======
+import java.io.IOException;
+>>>>>>> tambah forecast object
 
 public class ForecastServer
 {
@@ -15,6 +19,7 @@ public class ForecastServer
     {
         ForecastData data;
         
+<<<<<<< HEAD
         if(args.length == 0)
             handler = new ClientHandler(1234);
         else
@@ -26,6 +31,37 @@ public class ForecastServer
             {
                 data = new ForecastData(null, null, null);
                 handler.Send();
+=======
+        try
+        {
+            if(args.length == 0)
+                handler = new ClientHandler(1234);
+            else
+                handler = new ClientHandler(Integer.parseInt(args[0]));
+        }
+        catch(IOException ex)
+        {
+            System.out.println(ex);
+        }
+        
+        while(true)
+        {
+            data = handler.Listen();
+            if(data != null)
+            {
+                if(data.getForecastDate() != null)
+                {
+                }
+                else if(data.getForecastDay() != null)
+                {
+                }
+                else if(data.getForecastWeather() != null)
+                {
+                }
+                
+                data = new ForecastData(null, null, null);
+                handler.Send(data);
+>>>>>>> tambah forecast object
             }
             else
             {
