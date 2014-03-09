@@ -51,13 +51,14 @@ public class SisterWeatherClient {
         try {
             //clientSocket= new Socket(ipAdrress, port);
             dgSocket= new DatagramSocket();
-            packet= new DatagramPacket(buffer,buffersize,adrres, port);
+            packet= new DatagramPacket(buffer,buffersize,adrres, port); 
             baos = new ByteArrayOutputStream();
             bais = new ByteArrayInputStream(buffer);
             ObjectInputStream ois= new ObjectInputStream(bais);
             ObjectOutputStream oos= new ObjectOutputStream(baos);
             while(true)
             {
+ 
               System.out.print("Massukan Perintah :");
               scan=new Scanner(System.in);
               input=scan.next();
