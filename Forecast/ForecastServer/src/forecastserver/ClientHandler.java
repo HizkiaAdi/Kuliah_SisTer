@@ -28,7 +28,7 @@ public class ClientHandler
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     private byte[] buffer;
-    private int BUF_SIZE = 1500;    
+    private int BUF_SIZE = 1500;
     
     public ClientHandler(int port) throws IOException
     {
@@ -70,6 +70,7 @@ public class ClientHandler
             oos.writeObject((Object)data);
             oos.flush();
             buffer = baos.toByteArray();
+            System.out.println(buffer.length);
             packet = new DatagramPacket(buffer, buffer.length, clienthost, clientport);
             socket.send(packet);
             
