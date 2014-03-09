@@ -19,6 +19,8 @@ public class ForecastServer
     public static void main(String[] args)
     {
         String param;
+        dataList = new ArrayList<ForecastData>();
+        data = new ArrayList<ForecastData>();
         
         ServerInit();
         
@@ -36,14 +38,15 @@ public class ForecastServer
         
         while(true)
         {
-            param = handler.Listen();
+            param = handler.Listen().toLowerCase();
+            System.out.println(param);
             data.clear();
             
             if(param != null)
             {
                 if(param.equals("all"))
                 {
-                    data = new ArrayList<>(dataList);
+                    data = new ArrayList<ForecastData>(dataList);
                 }
                 else
                 {
