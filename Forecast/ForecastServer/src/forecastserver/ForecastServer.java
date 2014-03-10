@@ -6,6 +6,9 @@ package forecastserver;
  */
 
 import SerializableObject.ForecastData;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,12 +79,27 @@ public class ForecastServer
     
     public static void ServerInit()
     {
-        dataList.add(new ForecastData("10-03-2014", "senin", "mendung"));
-        dataList.add(new ForecastData("11-03-2014", "selasa", "cerah"));
-        dataList.add(new ForecastData("12-03-2014", "rabu", "hujan badai"));
-        dataList.add(new ForecastData("13-03-2014", "kamis", "berawan"));
-        dataList.add(new ForecastData("14-03-2014", "jumat", "hujan"));
-        dataList.add(new ForecastData("15-03-2014", "sabtu", "cerak"));
-        dataList.add(new ForecastData("16-03-2014", "minggu", "hujan ringan"));        
+        //dataList.add(new ForecastData("10-03-2014", "senin", "mendung"));
+        //dataList.add(new ForecastData("11-03-2014", "selasa", "cerah"));
+        //dataList.add(new ForecastData("12-03-2014", "rabu", "hujan badai"));
+        //dataList.add(new ForecastData("13-03-2014", "kamis", "berawan"));
+        //dataList.add(new ForecastData("14-03-2014", "jumat", "hujan"));
+        //dataList.add(new ForecastData("15-03-2014", "sabtu", "cerak"));
+        //dataList.add(new ForecastData("16-03-2014", "minggu", "hujan ringan"));
+        try
+        {
+            try(BufferedReader br = new BufferedReader(new FileReader(new File("forecast.txt"))))
+            {
+                for(String line; (line = br.readLine()) != null; )
+                {
+                    String[] ar = line.split(",");
+                    dataList.add(new ForecastData(ar[0], ar[1], ar[2]));
+                }
+            }
+        }
+        catch(IOException ex)
+        {
+            System.out.println(ex);
+        }
     }
 }
