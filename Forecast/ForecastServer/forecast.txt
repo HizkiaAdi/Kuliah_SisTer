@@ -1,0 +1,7 @@
+10-03-2014,senin,mendung
+11-03-2014,selasa,cerah
+12-03-2014,rabu,hujan badai
+13-03-2014,kamis,berawan
+14-03-2014,jumat,hujan
+15-03-2014,sabtu,cerah
+16-03-2014,minggu,hujan ringan
