@@ -237,3 +237,4 @@ build.xml
 *.swp
 *.DS_Store
 *.lock
+/RSS/RPCServer/nbproject/private/

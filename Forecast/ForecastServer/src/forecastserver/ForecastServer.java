@@ -81,13 +81,12 @@ public class ForecastServer
     {
         try
         {
-            try(BufferedReader br = new BufferedReader(new FileReader(new File("forecast.txt"))))
+            BufferedReader br = new BufferedReader(new FileReader(new File("forecast.txt")));
+            
+            for(String line; (line = br.readLine()) != null; )
             {
-                for(String line; (line = br.readLine()) != null; )
-                {
-                    String[] ar = line.split(",");
-                    dataList.add(new ForecastData(ar[0], ar[1], ar[2]));
-                }
+                String[] ar = line.split(",");
+                dataList.add(new ForecastData(ar[0], ar[1], ar[2]));
             }
         }
         catch(IOException ex)

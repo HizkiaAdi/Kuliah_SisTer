@@ -7,7 +7,6 @@ package forecastserver;
 
 import java.net.*;
 import SerializableObject.ForecastData;
-import SerializableObject.ForecastObject;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -43,7 +42,7 @@ public class ClientHandler
     {
         try
         {
-            socket.receive(packet);            
+            socket.receive(packet);          
             this.clienthost = packet.getAddress();
             this.clientport = packet.getPort();
             System.out.println(clienthost + " " + clientport);
