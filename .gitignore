@@ -238,3 +238,4 @@ build.xml
 *.DS_Store
 *.lock
 /RSS/RPCServer/nbproject/private/
+/RSS/RPCClient/nbproject/private/
