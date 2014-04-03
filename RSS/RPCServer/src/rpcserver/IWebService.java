@@ -20,4 +20,8 @@ public interface IWebService
     public byte[] getCuacaIndonesia();
     @WebMethod
     public byte[] getAviationObservation();
+    @WebMethod
+    public byte[] getStasiun();
+    @WebMethod
+    public byte[] getKoordinatKota();
 }

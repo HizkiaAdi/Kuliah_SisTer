@@ -31,7 +31,7 @@ public class XMLParser
     
     public static ArrayList<Gempa> getGempa() throws ParserConfigurationException, SAXException, IOException
     {
-        ArrayList<Gempa> gempa = new ArrayList<Gempa>();
+        ArrayList<Gempa> gempa = new ArrayList<>();
         
         dbf = DocumentBuilderFactory.newInstance();
         db = dbf.newDocumentBuilder();
@@ -61,7 +61,7 @@ public class XMLParser
     
     public static ArrayList<Cuaca> getCuacaIndonesia() throws ParserConfigurationException, SAXException, IOException
     {
-        ArrayList<Cuaca> cuaca = new ArrayList<Cuaca>();
+        ArrayList<Cuaca> cuaca = new ArrayList<>();
         
         dbf = DocumentBuilderFactory.newInstance();
         db = dbf.newDocumentBuilder();
@@ -90,7 +90,7 @@ public class XMLParser
     
     public static ArrayList<Aviation> getAviationObservation() throws ParserConfigurationException, SAXException, IOException
     {
-        ArrayList<Aviation> aviation = new ArrayList<Aviation>();
+        ArrayList<Aviation> aviation = new ArrayList<>();
         
         dbf = DocumentBuilderFactory.newInstance();
         db = dbf.newDocumentBuilder();
@@ -103,7 +103,6 @@ public class XMLParser
         
         for(int x = 0; x < nodes.getLength(); x++)
         {
-            
             childs = nodes.item(x).getChildNodes();
             if(childs.getLength() < 42)
                 continue;
@@ -133,5 +132,65 @@ public class XMLParser
         }
         
         return aviation;
+    }
+    
+    public static ArrayList<Stasiun> getStasiun() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Stasiun> stasiun = new ArrayList<>();
+        
+        dbf = DocumentBuilderFactory.newInstance();
+        db = dbf.newDocumentBuilder();
+        if(isLocal)
+            doc = db.parse(new File("C:\\Users\\Voron\\Desktop\\alamatstasiun_NEW.xml"));
+        else
+            doc = db.parse(new URL("http://data.bmkg.go.id/alamatstasiun_NEW.xml").openStream());
+        
+        nodes = doc.getDocumentElement().getElementsByTagName("Row");
+        
+        for(int x = 0; x < nodes.getLength(); x++)
+        {
+            childs = nodes.item(x).getChildNodes();
+            if(childs.getLength() < 11)
+                continue;
+            stasiun.add(new Stasiun(childs.item(1).getTextContent(),
+                    childs.item(3).getTextContent(),
+                    childs.item(5).getTextContent(),
+                    childs.item(7).getTextContent(),
+                    childs.item(9).getTextContent(),
+                    childs.item(11).getTextContent(),
+                    childs.item(13).getTextContent(),
+                    childs.item(15).getTextContent(),
+                    childs.item(17).getTextContent(),
+                    childs.item(19).getTextContent(),
+                    childs.item(21).getTextContent()));
+        }
+        
+        return stasiun;
+    }
+    
+    public static ArrayList<Kota> getKoordinatKota() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Kota> kota = new ArrayList<>();
+        
+        dbf = DocumentBuilderFactory.newInstance();
+        db = dbf.newDocumentBuilder();
+        if(isLocal)
+            doc = db.parse(new File("C:\\Users\\Voron\\Desktop\\kota_kabupaten.xml"));
+        else
+            doc = db.parse(new URL("http://data.bmkg.go.id/kota_kabupaten.xml").openStream());
+        
+        nodes = doc.getDocumentElement().getElementsByTagName("Koordinat");
+        
+        for(int x = 0; x < nodes.getLength(); x++)
+        {
+            childs = nodes.item(x).getChildNodes();
+            if(childs.getLength() < 5)
+                continue;
+            kota.add(new Kota(childs.item(1).getTextContent(),
+                    Float.parseFloat(childs.item(5).getTextContent()),
+                    Float.parseFloat(childs.item(7).getTextContent())));
+        }
+        
+        return kota;
     }
 }

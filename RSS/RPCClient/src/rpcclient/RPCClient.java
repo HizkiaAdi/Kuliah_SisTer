@@ -43,7 +43,8 @@ public class RPCClient
         while(param != 6)
         {
             System.out.println("pilihan:\n1. gempa terkini\n2. cuaca indonesia\n"
-                    + "3. aviation observation\n6. keluar");
+                    + "3. aviation observation\n4. stasiun\n5. Koordinat Kota\n"
+                    + "6. keluar");
             param = Integer.parseInt(scanner.nextLine());
             
             switch(param)
@@ -58,8 +59,10 @@ public class RPCClient
                     displayAviationObservation();
                     break;
                 case 4:
+                    displayStasiun();
                     break;
                 case 5:
+                    displayKoordinatKota();
                     break;
             }
         }
@@ -124,6 +127,47 @@ public class RPCClient
         aviation = (ArrayList<Aviation>)ois.readObject();
         
         for(Aviation i : aviation)
+        {
+            System.out.println(i.toString() + "\n");
+        }
+    }
+    
+    public static void displayStasiun() throws IOException, ClassNotFoundException
+    {
+        ArrayList<Stasiun> stasiun;
+        
+        buffer = wsObject.getStasiun();
+        if(buffer.length == 1)
+        {
+            System.err.println("ERROR: Error in webservice!");
+            return;
+        }
+        bais = new ByteArrayInputStream(buffer);
+        ois = new ObjectInputStream(bais);
+        ois.read(buffer);
+        stasiun = (ArrayList<Stasiun>)ois.readObject();
+        
+        for(Stasiun i : stasiun)
+        {
+            System.out.println(i.toString() + "\n");
+        }
+    }
+    
+    public static void displayKoordinatKota() throws IOException, ClassNotFoundException
+    {
+        ArrayList<Kota> kota;
+        buffer = wsObject.getKoordinatKota();
+        if(buffer.length == 1)
+        {
+            System.err.println("ERROR: Error in webservice!");
+            return;
+        }
+        bais = new ByteArrayInputStream(buffer);
+        ois = new ObjectInputStream(bais);
+        ois.read(buffer);
+        kota = (ArrayList<Kota>)ois.readObject();
+        
+        for(Kota i : kota)
         {
             System.out.println(i.toString() + "\n");
         }

@@ -94,4 +94,55 @@ public class WebService implements IWebService
             return buffer;
         }
     }
+    
+    @Override
+    public byte[] getStasiun()
+    {
+        ArrayList<Stasiun> stasiun = null;
+        baos = new ByteArrayOutputStream();
+                
+        try
+        {
+            stasiun = XMLParser.getStasiun();
+            oos = new ObjectOutputStream(baos);
+            oos.writeObject((Object)stasiun);
+            oos.flush();
+            buffer = baos.toByteArray();
+        }
+        catch(IOException | ParserConfigurationException | SAXException ex)
+        {
+            System.err.println(ex.getLocalizedMessage());
+            return new byte[]{1};
+        }
+        finally
+        {
+            return buffer;
+        }
+    }
+    
+    @Override
+    public byte[] getKoordinatKota()
+    {
+        ArrayList<Kota> kota = null;
+        baos = new ByteArrayOutputStream();
+                
+        try
+        {
+            kota = XMLParser.getKoordinatKota();
+            oos = new ObjectOutputStream(baos);
+            oos.writeObject((Object)kota);
+            oos.flush();
+            buffer = baos.toByteArray();
+            System.out.println("x");
+        }
+        catch(IOException | ParserConfigurationException | SAXException ex)
+        {
+            System.err.println(ex.getLocalizedMessage());
+            return new byte[]{1};
+        }
+        finally
+        {
+            return buffer;
+        }
+    }
 }
