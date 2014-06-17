@@ -1,0 +1,4 @@
+interface Service {
+    void ping();
+	string hello(in string param);
+};

@@ -1,0 +1,1 @@
+java -classpath . INSClient -ORBInitRef PingService=corbaloc:iiop:1.2@localhost:1050/PingService
